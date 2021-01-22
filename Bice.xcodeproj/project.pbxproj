@@ -14,6 +14,9 @@
 		39BB470025B9E76300EDC0C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BB46FE25B9E76300EDC0C2 /* Main.storyboard */; };
 		39BB470B25B9E84200EDC0C2 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39BB470A25B9E84200EDC0C2 /* Starscream.framework */; };
 		39BB470C25B9E84200EDC0C2 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 39BB470A25B9E84200EDC0C2 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E1046F7625BAB7A5003D5FFF /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1046F7525BAB7A5003D5FFF /* ObjectMapper.framework */; };
+		E1046F7725BAB7A5003D5FFF /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E1046F7525BAB7A5003D5FFF /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E1046F7925BABBEE003D5FFF /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1046F7825BABBEE003D5FFF /* Ticker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,6 +26,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E1046F7725BAB7A5003D5FFF /* ObjectMapper.framework in Embed Frameworks */,
 				39BB470C25B9E84200EDC0C2 /* Starscream.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -40,6 +44,8 @@
 		39BB470125B9E76300EDC0C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39BB470225B9E76300EDC0C2 /* Bice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bice.entitlements; sourceTree = "<group>"; };
 		39BB470A25B9E84200EDC0C2 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/Mac/Starscream.framework; sourceTree = "<group>"; };
+		E1046F7525BAB7A5003D5FFF /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/Mac/ObjectMapper.framework; sourceTree = "<group>"; };
+		E1046F7825BABBEE003D5FFF /* Ticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1046F7625BAB7A5003D5FFF /* ObjectMapper.framework in Frameworks */,
 				39BB470B25B9E84200EDC0C2 /* Starscream.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,6 +88,7 @@
 				39BB470125B9E76300EDC0C2 /* Info.plist */,
 				39BB470225B9E76300EDC0C2 /* Bice.entitlements */,
 				39BB46FB25B9E76300EDC0C2 /* Preview Content */,
+				E1046F7825BABBEE003D5FFF /* Ticker.swift */,
 			);
 			path = Bice;
 			sourceTree = "<group>";
@@ -96,6 +104,7 @@
 		39BB470925B9E84200EDC0C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1046F7525BAB7A5003D5FFF /* ObjectMapper.framework */,
 				39BB470A25B9E84200EDC0C2 /* Starscream.framework */,
 			);
 			name = Frameworks;
@@ -173,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39BB46F825B9E76200EDC0C2 /* ContentView.swift in Sources */,
+				E1046F7925BABBEE003D5FFF /* Ticker.swift in Sources */,
 				39BB46F625B9E76200EDC0C2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
