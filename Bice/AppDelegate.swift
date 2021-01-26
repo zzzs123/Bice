@@ -14,8 +14,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 //    var window: NSWindow!
 
+    var label = PriceLabel()
+    
+//    本篇所列出的所有wss接口baseurl: wss://fstream.binance.com
+//    订阅单一stream格式为 /ws/<streamName>
+//    组合streams的URL格式为 /stream?streams=<streamName1>/<streamName2>/<streamName3>
+//    订阅组合streams时，事件payload会以这样的格式封装 {"stream":"<streamName>","data":<rawPayload>}
+//    stream名称中所有交易对均为小写
+//    每个链接有效期不超过24小时，请妥善处理断线重连。
+//    服务端每5分钟会发送ping帧，客户端应当在15分钟内回复pong帧，否则服务端会主动断开链接。允许客户端发送不成对的pong帧(即客户端可以以高于15分钟每次的频率发送pong帧保持链接)。
+//    Websocket服务器每秒最多接受10个订阅消息。
+//    如果用户发送的消息超过限制，连接会被断开连接。反复被断开连接的IP有可能被服务器屏蔽。
+//    单个连接最多可以订阅 200 个Streams。
+
     lazy var socket: WebSocket = {
         let url = URL(string: "wss://fstream.binance.com/ws/btcusdt@ticker")!
+//        let url = URL(string: "wss://fstream.binance.com/stream?streams=btcusdt@ticker/etcusdt@ticker")!
 //        let url = URL(string: "wss://fstream.binance.com/ws/btcusdt@markPrice@1s")!
 //        let url = URL(string: "wss://stream.binance.com:9443/ws/!ticker@arr")!
         var request = URLRequest(url: url)
@@ -56,16 +70,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //                      "L": 18150,         // 24小时内最后一笔成交交易ID
 //                      "n": 18151          // 24小时内成交数
 //                    }
+                    let s = json["s"] as! String
                     let c = json["c"] as! String
                     print("Received text: \(c)")
-                    self?.statusItem.button?.title = "BTC/USDT: " + c
+                    self?.label.price = s + ": " + c
+//                    let btcusdt = json["btcusdt@ticker"]
                 }
                 
                 
-//                print("Received text: \(string)")
+                print("Received text: \(string)")
             case .binary(let data):
                 print("Received data: \(data.count)")
-            case .ping(_):
+            case .ping(let data):
+                print("Received ping: \(data?.count)")
                 break
             case .pong(_):
                 break
@@ -88,12 +105,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     lazy var statusItem: NSStatusItem = {
         let statusItem = NSStatusBar.system.statusItem(withLength: 110)
-        statusItem.button?.font = NSFont.systemFont(ofSize: 11)
+        if let button = statusItem.button {
+            label.frame = button.bounds
+            button.addSubview(label)
+        }
+//        statusItem.button?.font = NSFont.systemFont(ofSize: 8)
+//        statusItem.button?.title = ""
+//        statusItem.button?.image = NSImage(named: "menubar-warning-white")
+//        statusItem.button?.imagePosition = .imageLeading
+
         let menu = NSMenu(title: "menu")
         let item = NSMenuItem(title: "item", action: nil, keyEquivalent: "key1")
         menu.items.append(item)
         statusItem.menu = menu
         
+        
+        
+//        let ctl = NSHostingController(rootView: BarLabel())
+//
+////        let v = NSHostingView(rootView: BarLabel())
+//        statusItem.button?.addSubview(ctl.view)
         return statusItem
     }()
 
